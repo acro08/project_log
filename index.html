@@ -1,1 +1,355 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <style>
+        /* Base styles */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --dark-bg: #2c3e50;
+            --border-color: #e1e1e1;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+        }
+        
+        /* Header styles */
+        header {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .site-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .site-description {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 2rem;
+        }
+        
+        .nav-links a {
+            display: block;
+            padding: 1rem 0;
+            color: var(--primary-color);
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        /* Main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Blog posts */
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .post {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .post:hover {
+            transform: translateY(-5px);
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .post-content {
+            padding: 1.5rem;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .post-excerpt {
+            margin-bottom: 1rem;
+        }
+        
+        .read-more {
+            display: inline-block;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            height: fit-content;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .about-me img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .categories-list, .recent-posts-list {
+            list-style: none;
+        }
+        
+        .categories-list li, .recent-posts-list li {
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .categories-list li:last-child, .recent-posts-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .social-links li {
+            margin: 0 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="site-title">My Blog</h1>
+        <p class="site-description">Sharing thoughts, stories, and ideas through writing</p>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Categories</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="container">
+        <section class="blog-posts">
+            <!-- Blog Post 1 -->
+            <article class="post">
+                <div class="post-image" style="background-image: url('https://via.placeholder.com/800x400')"></div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date">June 15, 2023</span>
+                        <span class="post-category">Technology</span>
+                    </div>
+                    <h2 class="post-title"><a href="#">The Future of Web Development</a></h2>
+                    <p class="post-excerpt">Exploring the latest trends and technologies shaping the future of web development, from AI-assisted coding to new frameworks and tools that are changing how we build for the web.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+            
+            <!-- Blog Post 2 -->
+            <article class="post">
+                <div class="post-image" style="background-image: url('https://via.placeholder.com/800x400')"></div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date">May 28, 2023</span>
+                        <span class="post-category">Writing</span>
+                    </div>
+                    <h2 class="post-title"><a href="#">Finding Your Writing Voice</a></h2>
+                    <p class="post-excerpt">How to develop a unique writing style that reflects your personality and resonates with your readers. Tips and exercises to help you find and refine your authentic voice.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+            
+            <!-- Blog Post 3 -->
+            <article class="post">
+                <div class="post-image" style="background-image: url('https://via.placeholder.com/800x400')"></div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-date">April 10, 2023</span>
+                        <span class="post-category">Productivity</span>
+                    </div>
+                    <h2 class="post-title"><a href="#">Building a Morning Routine for Creative Work</a></h2>
+                    <p class="post-excerpt">Discover how establishing a consistent morning routine can boost your creativity and productivity throughout the day. Practical advice for writers and creators.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </article>
+        </section>
+        
+        <aside class="sidebar">
+            <div class="sidebar-section about-me">
+                <h3 class="sidebar-title">About Me</h3>
+                <img src="https://via.placeholder.com/300x200" alt="About Me">
+                <p>I'm a writer and blogger passionate about sharing stories and insights. Welcome to my corner of the internet!</p>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Categories</h3>
+                <ul class="categories-list">
+                    <li><a href="#">Technology</a></li>
+                    <li><a href="#">Writing</a></li>
+                    <li><a href="#">Productivity</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Life</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Recent Posts</h3>
+                <ul class="recent-posts-list">
+                    <li><a href="#">The Future of Web Development</a></li>
+                    <li><a href="#">Finding Your Writing Voice</a></li>
+                    <li><a href="#">Building a Morning Routine</a></li>
+                    <li><a href="#">Why I Write Every Day</a></li>
+                    <li><a href="#">My Favorite Writing Tools</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <ul class="social-links">
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">GitHub</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Instagram</a></li>
+            </ul>
+            <p class="copyright">© 2023 My Blog. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
